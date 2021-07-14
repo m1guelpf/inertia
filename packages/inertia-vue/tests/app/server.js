@@ -36,9 +36,6 @@ app.get('/', (req, res) => inertia.render(req, res, {
   },
 }))
 
-app.get('/transform-props', (req, res) => inertia.render(req, res, { component: 'Dump', props: { foo: 'bar', bar: 'baz' }}))
-app.get('/error-resolver', (req, res) => inertia.render(req, res, { component: 'ErrorResolver' }))
-
 app.get('/links/partial-reloads', (req, res) => inertia.render(req, res, { component: 'Links/PartialReloads', props: { headers: req.headers, foo: Number.parseInt(req.query.foo || 0) + 1, bar: props => props.foo + 1, baz: props => props.foo + 2 }}))
 app.all('/links/preserve-state-page-two', (req, res) => inertia.render(req, res, { component: 'Links/PreserveState', props: { foo: req.query.foo }}))
 app.all('/links/preserve-scroll-page-two', (req, res) => inertia.render(req, res, { component: 'Links/PreserveScroll', props: { foo: req.query.foo }}))
@@ -66,6 +63,9 @@ app.post('/dump/post', upload.any(), (req, res) => inertia.render(req, res, { co
 app.put('/dump/put', upload.any(), (req, res) => inertia.render(req, res, { component: 'Dump', props: { headers: req.headers, method: 'put', form: req.body, query: req.query, files: req.files }}))
 app.patch('/dump/patch', upload.any(), (req, res) => inertia.render(req, res, { component: 'Dump', props: { headers: req.headers, method: 'patch', form: req.body, query: req.query, files: req.files }}))
 app.delete('/dump/delete', upload.any(), (req, res) => inertia.render(req, res, { component: 'Dump', props: { headers: req.headers, method: 'delete', form: req.body, query: req.query, files: req.files }}))
+
+app.get('/persistent-layouts/shorthand/simple/page-a', (req, res) => inertia.render(req, res, { props: { foo: 'bar', baz: 'example' }}))
+app.get('/persistent-layouts/shorthand/nested/page-a', (req, res) => inertia.render(req, res, { props: { foo: 'bar', baz: 'example' }}))
 
 app.post('/events/errors', (req, res) => inertia.render(req, res, { component: 'Events', props: { errors: { foo: 'bar' } }}))
 
